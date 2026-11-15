@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root, [data-theme='dark'] {
+  --bg: 11 15 20; --surface: 18 24 32; --raised: 26 34 45; --line: 38 49 64;
+  --ink: 232 237 243; --muted: 148 163 184; --faint: 100 116 139;
+  --accent: 16 185 129; --up: 52 211 153; --down: 248 113 113; --warn: 251 191 36; --info: 96 165 250;
+  --crit: 244 63 94; --high: 251 146 60; --med: 250 204 21;
+}
+[data-theme='light'] {
+  --bg: 245 247 250; --surface: 255 255 255; --raised: 241 245 249; --line: 217 224 233;
+  --ink: 15 23 42; --muted: 71 85 105; --faint: 100 116 139;
+  --accent: 5 150 105; --up: 5 150 105; --down: 220 38 38; --warn: 180 83 9; --info: 37 99 235;
+  --crit: 225 29 72; --high: 234 88 12; --med: 161 98 7;
+}
+
+html, body, #root { height: 100%; }
+body {
+  @apply bg-bg text-ink font-sans antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+* { scrollbar-width: thin; scrollbar-color: rgb(var(--line)) transparent; }
+.num { font-variant-numeric: tabular-nums; }
+.safe-b { padding-bottom: max(env(safe-area-inset-bottom), 0px); }
+
+@layer components {
+  .card { @apply rounded-2xl border border-line bg-surface shadow-card; }
+  .chip { @apply inline-flex items-center gap-1 rounded-full border border-line bg-raised px-2.5 py-1 text-xs font-medium text-muted; }
+  .btn { @apply inline-flex min-h-[40px] items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold transition active:scale-[.98] disabled:opacity-50 disabled:pointer-events-none; }
+  .btn-primary { @apply btn bg-accent text-bg hover:brightness-110; }
+  .btn-ghost { @apply btn border border-line bg-raised text-ink hover:border-accent/60; }
+  .input { @apply min-h-[44px] w-full rounded-xl border border-line bg-raised px-3 text-sm text-ink placeholder:text-faint outline-none focus:border-accent; }
+  .h-sec { @apply text-[11px] font-semibold uppercase tracking-[.14em] text-faint; }
+}
+
+@keyframes shimmer { 0% { background-position: -200% 0 } 100% { background-position: 200% 0 } }
+.skel { background: linear-gradient(90deg, rgb(var(--raised)) 25%, rgb(var(--line) / .6) 50%, rgb(var(--raised)) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: .75rem; }
+@keyframes sheet-in { from { transform: translateY(24px); opacity: 0 } to { transform: none; opacity: 1 } }
+.sheet-in { animation: sheet-in .22s ease-out; }
+@media (prefers-reduced-motion: reduce) { .skel, .sheet-in { animation: none } }

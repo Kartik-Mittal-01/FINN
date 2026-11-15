@@ -1,0 +1,14 @@
+{
+  "name": "finn",
+  "private": true,
+  "description": "FINN – financial investment agent (ENAM AI Engineer Build Challenge prototype)",
+  "scripts": {
+    "setup": "python3 -m venv backend/.venv && backend/.venv/bin/pip install -r backend/requirements.txt && npm --prefix frontend install",
+    "dev:backend": "cd backend && .venv/bin/uvicorn app.main:app --reload --port 8000",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "./run.sh",
+    "seed": "cd backend && .venv/bin/python -m scripts.seed_demo",
+    "test": "cd backend && .venv/bin/python -m pytest tests -q"
+  }
+}

@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+data/finn.db
+data/documents/*
+data/cache/*
+!data/documents/.gitkeep
+!data/cache/.gitkeep
+.env
+.pytest_cache/
